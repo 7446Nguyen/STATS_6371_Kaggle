@@ -18,6 +18,12 @@ century21 = train %>%
             mutate(logGrLivArea = log(GrLivArea)) %>%
              as_tibble()
 
+#Convert Multi-level Categorical Variables to dummy variables, 23JUL2019JN----
+install.packages("fastDummies")
+library(fastDummies)
+
+newCentury21 = dummy_cols(century21)
+
 #Get tables for all categorical variables----
 cat_DF <- century21[, sapply(century21, is.categorical)]
 lapply(cat_DF, function(x) table(x, useNA="ifany"))
